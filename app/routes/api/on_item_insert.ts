@@ -19,15 +19,23 @@ export const action: ActionFunction = async ({ request }) => {
     if (request.method === "POST") {
       /* handle "POST" */
       const requestBody = await request.json();
+      const itemData = requestBody.event?.data?.new;
+
+      if (!itemData) {
+        return new Response("Invalid request", { status: 500 });
+      }
 
       hasuraAdminClient.request(INSERT_ITEM_LOG, {
-        object: { item_json: requestBody?.event?.data?.new },
+        object: { item_json: itemData },
       });
+
+      return new Response(null, { status: 200 });
     }
 
-    return new Response(null, { status: 200 });
+    return new Response("Request method not supported", { status: 400 });
   } catch (err) {
-    return new Response(JSON.stringify(err), { status: 400 });
+    console.log("err: ", err);
+    return new Response(JSON.stringify(err), { status: 500 });
   }
 };
 
