@@ -1,6 +1,6 @@
-# fly.toml file generated for rh-remix on 2021-12-28T15:35:06-07:00
+# fly.toml file generated for red-sun-3656 on 2021-12-29T10:01:25-07:00
 
-app = "rh-remix"
+app = "red-sun-3656"
 
 kill_signal = "SIGINT"
 kill_timeout = 5
